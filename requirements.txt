@@ -1,2 +1,5 @@
 Django==2.1.5
 psycopg2==2.7.6.1
+graphene-django>=2.0
+PyJWT==1.7.1
+django-graphql-jwt==0.2.0
