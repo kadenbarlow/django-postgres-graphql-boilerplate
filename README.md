@@ -27,8 +27,7 @@ virtualenv ../<project_name>
 source bin/activate
 
 pip install -r requirements.txt
-./postgres/setup_postgres.sh
-./postgres/run_postgres.sh
+./run_postgres.sh
 python manage.py migrate
 python manage.py runserver
 ```
