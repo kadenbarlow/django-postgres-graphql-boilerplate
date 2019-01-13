@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from datetime import timedelta
+from datetime import timedelta # used for JWT settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Project Apps Listed First
     'users.apps.UserAppConfig',
-    'app.apps.AppConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
 GRAPHENE = {
     'SCHEMA': 'server.schema.schema', # Where your Graphene schema lives
-    'MIDDLEWARE': [
+    'MIDDLEWARE': [ # Provides info.context.user to queries and mutations
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
 }
@@ -57,7 +57,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 GRAPHQL_JWT = {
-    'JWT_VERIFY_EXPIRATION': False,
+    'JWT_VERIFY_EXPIRATION': False, # Turned off for easy graphql testing
     'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
@@ -96,6 +96,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# Should be updated with your database info and credentials
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -107,6 +108,7 @@ DATABASES = {
     }
 }
 
+# Tells django to use custom user model for authentication
 AUTH_USER_MODEL = 'users.User'
 
 

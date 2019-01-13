@@ -2,6 +2,7 @@ import graphene
 import users.schema
 import graphql_jwt
 
+# As the app grows the Query and Mutation class will extend from more schemas
 class Query(users.schema.Query,
             graphene.ObjectType):
   pass
