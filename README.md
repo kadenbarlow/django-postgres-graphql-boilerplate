@@ -1,7 +1,7 @@
 # Django - Postgres - GraphQL Boilerplate
 
 I was looking for a boilerplate to run a GraphQL Django backend to use with a React or VueJS frontend and couldn't find one that fit my purposes so I wrote this one.
-The boilerplate uses graphene-django for graphql support and a custom user app has been created and integrated with JWT for authentication. The boilerplate can be used with any database backend Django supports but for local development this boilerplate uses docker to run a postgres instance.
+The boilerplate uses graphene-django for graphql support and a custom user app has been created and integrated with JWT for authentication. The boilerplate can be used with any database backend Django supports but this boilerplate uses postgres. Everything is set up using docker for easy setup and development.
 
 ## Getting Started
 
@@ -9,8 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- Python3.7
-- This setup assumes that have you have docker installed. You can skip this by having postgres installed locally or make the needed changes to settings.py to use a different database.
+- docker (on mac install using `brew cask install docker`)
 
 ### Installing
 
@@ -22,24 +21,24 @@ cd <project_name>
 git remote add origin <your_project_git_url>
 git remote rm <repository>
 
-# VirtualEnv not necessary but recommended
-virtualenv ../<project_name>
-source bin/activate
-
-pip install -r requirements.txt
-./run_postgres.sh
-python manage.py migrate
-python manage.py runserver
+docker-compose up
 ```
 
-You should now see `Starting development server at http://127.0.0.1:800/`
+You should now see `Starting development server at http://0.0.0.0:8000/`
+
+## Running migrations
+
+```
+docker-compose run web python manage.py makemigrations
+docker-compose run web python manage.py migrate
+```
 
 ## Running the tests
 
 Example GraphQL tests have been added to the users app. To run those and future tests use the command below.
 
 ```
-python manage.py test
+docker-compose run web python manage.py test
 ```
 
 ## Built With

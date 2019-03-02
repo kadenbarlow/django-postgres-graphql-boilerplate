@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    tty: true
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DJANGO_SETTINGS_MODULE: settings.local
+      DATABASE_NAME: app
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: docker
+      SECRET_KEY: m#vqw87h5gr@6xg2_1*-=af6!qslhwz6r)zva3li0gltpw8s(w
+
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      # To use a local directory instead:
+      # - ./postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: app
+
+volumes:
+  postgres:
