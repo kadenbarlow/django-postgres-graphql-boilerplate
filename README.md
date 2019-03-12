@@ -16,10 +16,13 @@ These instructions will get you a copy of the project up and running on your loc
 Below is a step by step series of examples that tell you how to get a development env running.
 
 ```
-git clone --depth 1 <repository> <project_name>
+git clone <repository> <project_name>
 cd <project_name>
-git remote rm origin
+rm -rf .git
 git remote add origin <your_project_git_url>
+git add .
+git commit -m <message>
+git push -u origin master
 
 docker-compose up
 ```
