@@ -18,8 +18,8 @@ Below is a step by step series of examples that tell you how to get a developmen
 ```
 git clone --depth 1 <repository> <project_name>
 cd <project_name>
+git remote rm origin
 git remote add origin <your_project_git_url>
-git remote rm <repository>
 
 docker-compose up
 ```
