@@ -32,8 +32,9 @@ You should now see `Starting development server at http://0.0.0.0:8000/`
 ## Running migrations
 
 ```
-docker-compose run web python manage.py makemigrations
-docker-compose run web python manage.py migrate
+docker-compose run web python manage.py makemigrations && python manage.py migrate
+# OR you could just
+docker-compose restart
 ```
 
 ## Running the tests
@@ -42,6 +43,26 @@ Example GraphQL tests have been added to the users app. To run those and future 
 
 ```
 docker-compose run web python manage.py test
+```
+
+## Installing New Packages
+
+This zsh function shows the process and makes it really easy.
+```
+dc-pip-install() {
+  package_name=$1
+  requirements_file=$2
+  if [[ -z $requirements_file ]]
+  then
+  requirements_file='./requirements.txt'
+  fi
+
+  echo "$package_name" >> $requirements_file
+  dc down
+  dc build
+  dc up
+  dc run web pip freeze >> $requirements_file
+}
 ```
 
 ## Built With
