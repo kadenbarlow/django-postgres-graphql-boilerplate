@@ -19,6 +19,7 @@ Below is a step by step series of examples that tell you how to get a developmen
 git clone <repository> <project_name>
 cd <project_name>
 rm -rf .git
+git init
 git remote add origin <your_project_git_url>
 git add .
 git commit -m <message>
