@@ -32,10 +32,8 @@ RUN mkdir /app \
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir pipenv
-COPY --chown=docker:docker Pipfile ./Pipfile
-COPY --chown=docker:docker Pipfile.lock ./Pipfile.lock
-RUN pipenv install --system --deploy --ignore-pipfile --dev
+COPY --chown=docker:docker requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
 
 COPY --chown=docker:docker . /app
 
