@@ -49,6 +49,7 @@ docker-compose run web python manage.py test
 
 This zsh function shows the process and makes it really easy.
 ```
+alias dc='docker-compose'
 dc-pip-install() {
   package_name=$1
   requirements_file=$2
