@@ -33,9 +33,22 @@ You should now see `Starting development server at http://0.0.0.0:8000/`
 ## Running migrations
 
 ```
-docker-compose run web python manage.py makemigrations && python manage.py migrate
+docker-compose run -rm web python manage.py makemigrations && python manage.py migrate
 # OR you could just
 docker-compose restart
+```
+
+## Seed Database
+
+Seed data can be kept in the fixtures directory. It can be stored as YAML or json, although I prefer YAML
+Example file for users is included. It creates three users. One admin, admin@app.com, and two other test users. The following commands load and dump data.
+
+```
+# load a specific fixture
+docker-compose run --rm web loaddata ./fixtures/users/user.yaml
+
+# dump an apps data in a fixture
+docker-compose run --rm web dumpdata users.user --format=yaml > ./fixtures/users/user.yaml
 ```
 
 ## Running the tests
@@ -50,7 +63,6 @@ docker-compose run web python manage.py test
 
 This zsh function shows the process and makes it really easy.
 ```
-alias dc='docker-compose'
 dc-pip-install() {
   package_name=$1
   requirements_file=$2
@@ -59,11 +71,13 @@ dc-pip-install() {
   requirements_file='./requirements.txt'
   fi
 
-  echo "$package_name" >> $requirements_file
-  dc down
-  dc build
-  dc up
-  dc run web pip freeze >> $requirements_file
+  echo $package_name >> $requirements_file
+  docker-compose down
+  docker-compose build
+
+  name_version=`docker-compose run --rm web pip freeze | grep -i $package_name`
+  new_requirements=`sed "s/$package_name/$name_version/" $requirements_file`
+  echo $new_requirements | tr -d "\r" | cat > $requirements_file
 }
 ```
 

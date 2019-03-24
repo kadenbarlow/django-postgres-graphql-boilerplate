@@ -1,0 +1,45 @@
+- model: users.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$120000$yTjwqrRbBIXO$dE9ceCnaE/fai4N5xxwhcgPYXbigEk0UWt0FSIY9cXM= # Password1
+    last_login: null
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: admin@app.com
+    is_staff: true
+    is_active: true
+    date_joined: 2019-03-24 06:07:26.504470+00:00
+    groups: []
+    user_permissions: []
+- model: users.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$120000$yTjwqrRbBIXO$dE9ceCnaE/fai4N5xxwhcgPYXbigEk0UWt0FSIY9cXM= # Password1
+    last_login: null
+    is_superuser: false
+    username: testuser1@app.com
+    first_name: 'Test'
+    last_name: 'User'
+    email: testuser1@app.com
+    is_staff: false
+    is_active: true
+    date_joined: 2019-03-24 06:07:26.504470+00:00
+    groups: []
+    user_permissions: []
+- model: users.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$120000$yTjwqrRbBIXO$dE9ceCnaE/fai4N5xxwhcgPYXbigEk0UWt0FSIY9cXM= # Password1
+    last_login: null
+    is_superuser: false
+    username: testuser2@app.com
+    first_name: 'Test'
+    last_name: 'User'
+    email: testuser2@app.com
+    is_staff: false
+    is_active: true
+    date_joined: 2019-03-24 06:07:26.504470+00:00
+    groups: []
+    user_permissions: []
