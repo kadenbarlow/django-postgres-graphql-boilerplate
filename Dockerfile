@@ -39,6 +39,4 @@ RUN pip install -r requirements.txt
 COPY --chown=docker:docker . /app
 
 USER docker
-CMD python manage.py makemigrations \
-  && python manage.py migrate \
-  && python manage.py runserver 0.0.0.0:8000
+CMD ./scripts/start_app.sh

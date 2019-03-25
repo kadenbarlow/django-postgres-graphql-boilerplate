@@ -44,6 +44,9 @@ Seed data can be kept in the fixtures directory. It can be stored as YAML or jso
 Example file for users is included. It creates three users. One admin, admin@app.com, and two other test users. The following commands load and dump data.
 
 ```
+# load all fixtures
+docker-compose run --rm web ./scripts/seed_database.sh
+
 # load a specific fixture
 docker-compose run --rm web loaddata ./fixtures/users/user.yaml
 
