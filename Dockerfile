@@ -14,6 +14,7 @@ RUN apt-get update \
     ca-certificates \
     software-properties-common \
     locales \
+    postgresql-client \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 

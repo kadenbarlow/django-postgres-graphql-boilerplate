@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: ./wait-for-postgres.sh postgres bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     tty: true
     volumes:
       - .:/app
