@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: .
-    command: ['./scripts/wait-for-postgres.sh', 'postgis', './scripts/start_app.sh']
+    command: ['./scripts/wait-for-postgres.sh', 'postgres', './scripts/start_app.sh']
     tty: true
     volumes:
       - .:/app
