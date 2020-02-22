@@ -25,18 +25,13 @@ git add .
 git commit -m <message>
 git push -u origin master
 
-docker-compose up
+./scripts/start-container # starts a local terminal for local development
+./scripts/migrate
+./scripts/seed # if you want to seed the database from fixtures
+./scripts/start-app
 ```
 
 You should now see `Starting development server at http://0.0.0.0:8000/`
-
-## Running migrations
-
-```
-docker-compose run -rm web python manage.py makemigrations && python manage.py migrate
-# OR you could just
-docker-compose restart
-```
 
 ## Seed Database
 
@@ -45,13 +40,13 @@ Example file for users is included. It creates three users. One admin, admin@app
 
 ```
 # load all fixtures
-docker-compose run --rm web ./scripts/seed_database.sh
+./scripts/seed
 
 # load a specific fixture
-docker-compose run --rm web loaddata ./fixtures/users/user.yaml
+./scripts/manage loaddata ./fixtures/users/user.yaml
 
 # dump an apps data in a fixture
-docker-compose run --rm web dumpdata users.user --format=yaml > ./fixtures/users/user.yaml
+./scripts/manage dumpdata users.user --format=yaml > ./fixtures/users/user.yaml
 ```
 
 ## Running the tests
@@ -59,30 +54,24 @@ docker-compose run --rm web dumpdata users.user --format=yaml > ./fixtures/users
 Example GraphQL tests have been added to the users app. To run those and future tests use the command below.
 
 ```
-docker-compose run web python manage.py test
+./scripts/manage test
 ```
 
 ## Installing New Packages
 
-This zsh function shows the process and makes it really easy.
-```
-dc-pip-install() {
-  package_name=$1
-  requirements_file=$2
-  if [[ -z $requirements_file ]]
-  then
-  requirements_file='./requirements.txt'
-  fi
+Dependencies are installed with pipenv. To install a new package simply run the command below. That will install it in your current working container. The `./scripts/start-container` script will build the docker image from scratch so you don't have to worry about running `pipenv install` when you start the container.
 
-  echo $package_name >> $requirements_file
-  docker-compose down
-  docker-compose build
-
-  name_version=`docker-compose run --rm web pip freeze | grep -i $package_name`
-  new_requirements=`sed "s/$package_name/$name_version/" $requirements_file`
-  echo $new_requirements | tr -d "\r" | cat > $requirements_file
-}
 ```
+pipenv install <package_name>
+```
+
+## Useful Apps and their Documentation
+
+Some apps come pre-installed in this boilerplate. Here is a list of them and a link to their documentation. You may want to remove these if you don't want their functionality.
+
+- [django-extentions](https://django-extensions.readthedocs.io/en/latest/installation_instructions.html) - Provides a bunch of useful commands for working in Django. For example, running `./scripts/manage shell_plus` will load a shell with all your models already loaded.
+- [django-simple-history](https://django-simple-history.readthedocs.io/en/latest/) - Provides a way to track changes to models. Useful for debugging and auditing which information has changed and by who. Simply add `history = HistoricalRecords()` on to one of your models. It also easily integrates with the admin tool.
+
 
 ## Built With
 

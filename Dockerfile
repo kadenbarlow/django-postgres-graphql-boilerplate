@@ -1,4 +1,5 @@
-FROM python:3
+# Development Dockerfile
+FROM python:3.8.1
 
 # Create a locked "docker" user to run the app
 RUN addgroup --gid 1000 docker \
@@ -28,15 +29,20 @@ RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
 RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
 
+RUN pip install pipenv
+
 RUN mkdir /app \
 && chown -R docker:docker /app
 
 WORKDIR /app
+USER docker
 
-COPY --chown=docker:docker requirements.txt ./requirements.txt
-RUN pip install -r requirements.txt
+COPY --chown=docker:docker Pipfile /app/Pipfile
+COPY --chown=docker:docker Pipfile.lock /app/Pipfile.lock
+
+RUN pipenv install
+# RUN pipenv install --deploy --ignore-pipfile in production
 
 COPY --chown=docker:docker . /app
 
-USER docker
 CMD ./scripts/start_app.sh

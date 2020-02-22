@@ -7,7 +7,7 @@ from graphql_jwt.decorators import login_required
 class UserType(DjangoObjectType):
   class Meta:
     model = User
-    exclude_fields = ('password')
+    exclude_fields = ['password']
 
 class Query(graphene.ObjectType):
   user = graphene.Field(
@@ -38,5 +38,3 @@ class SignUp(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
   signup = SignUp.Field()
-
-

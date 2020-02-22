@@ -1,0 +1,2 @@
+#!/bin/sh
+find fixtures -type f -exec pipenv run python manage.py loaddata "{}" \;
