@@ -70,6 +70,7 @@ pipenv install <package_name>
 Some apps come pre-installed in this boilerplate. Here is a list of them and a link to their documentation. You may want to remove these if you don't want their functionality.
 
 - [django-extentions](https://django-extensions.readthedocs.io/en/latest/installation_instructions.html) - Provides a bunch of useful commands for working in Django. For example, running `./scripts/manage shell_plus` will load a shell with all your models already loaded.
+- [django-import-export](https://django-import-export.readthedocs.io/en/stable/) - Provides an import and export which can be useful in the admin tool.
 - [django-simple-history](https://django-simple-history.readthedocs.io/en/latest/) - Provides a way to track changes to models. Useful for debugging and auditing which information has changed and by who. Simply add `history = HistoricalRecords()` on to one of your models. It also easily integrates with the admin tool.
 
 

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
   'django.contrib.staticfiles',
   'django_extensions',
   'graphene_django',
+  'import_export',
   'simple_history',
 ]
 

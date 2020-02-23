@@ -14,6 +14,7 @@ pyyaml = "*"
 psycopg2-binary = "*"
 django-extensions = "*"
 django-simple-history = "*"
+django-import-export = "*"
 
 [requires]
 python_version = "3.8"
